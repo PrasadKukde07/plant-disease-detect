@@ -451,21 +451,17 @@ def main():
         unsafe_allow_html=True
     )
     
-    st.sidebar.title("Dashboard")
-    app_mode = st.sidebar.selectbox("Select Page", ["Disease Recognition"])
-
     # Prediction Page
-    if app_mode == "Disease Recognition":
-        st.header("Disease Recognition")
-        test_image = st.file_uploader("Choose an Image:", type=["jpg", "jpeg", "png"]) #accept image
-        if test_image is not None: # check if image is uploaded
-            if st.button("Show Image"):
-                st.image(test_image, width=400, use_column_width=True)
-            # Predict button
-            if st.button("Predict"):
-                st.write("Our Prediction")
-                result_index = model_prediction(test_image)
-                class_name = ['Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy',
+    st.header("Disease Recognition")
+    test_image = st.file_uploader("Choose an Image:", type=["jpg", "jpeg", "png"]) #accept image
+    if test_image is not None: # check if image is uploaded
+        if st.button("Show Image"):
+            st.image(test_image, width=400, use_column_width=True)
+        # Predict button
+        if st.button("Predict"):
+            st.write("Our Prediction")
+            result_index = model_prediction(test_image)
+            class_name = ['Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy',
                               'Blueberry___healthy', 'Cherry_(including_sour)___Powdery_mildew',
                               'Cherry_(including_sour)___healthy', 'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot',
                               'Corn_(maize)___Common_rust_', 'Corn_(maize)___Northern_Leaf_Blight', 'Corn_(maize)___healthy',
@@ -479,10 +475,10 @@ def main():
                               'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites Two-spotted_spider_mite',
                               'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus',
                               'Tomato___healthy']
-                # Display the prediction
-                st.success("Model is Predicting it's a {}".format(class_name[result_index]))
-                # Call the prevention function
-                disease_prevention(class_name[result_index])
+            # Display the prediction
+            st.success("Model is Predicting it's a {}".format(class_name[result_index]))
+            # Call the prevention function
+            disease_prevention(class_name[result_index])
 
 def bg_image_base64():
     import base64
